@@ -63,6 +63,56 @@ body {
   pointer-events: none;
 }
 
+/* White Mode Theme Overrides */
+.white-mode {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+.white-mode header {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  border-color: #e2e8f0 !important;
+}
+
+.white-mode .glass-card {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+}
+
+.white-mode .bg-brand-dark {
+  background-color: #ffffff !important;
+}
+
+.white-mode .bg-brand-surface {
+  background-color: #f8fafc !important;
+}
+
+.white-mode .bg-brand-elevated {
+  background-color: #f1f5f9 !important;
+}
+
+.white-mode .border-brand-border {
+  border-color: #e2e8f0 !important;
+}
+
+.white-mode .text-white {
+  color: #0f172a !important;
+}
+
+.white-mode .text-slate-200,
+.white-mode .text-slate-300 {
+  color: #334155 !important;
+}
+
+.white-mode .text-slate-400 {
+  color: #64748b !important;
+}
+
+.white-mode .grid-bg-pattern {
+  background-image: radial-gradient(rgba(37, 99, 235, 0.15) 1px, transparent 1px);
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

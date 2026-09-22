@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ParticleCanvas from './components/ParticleCanvas';
 import ScrollProgress from './components/ScrollProgress';
 import Navbar from './components/Navbar';
@@ -15,17 +15,47 @@ import ResumeModal from './components/ResumeModal';
 
 export default function App() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
+  const [isWhiteMode, setIsWhiteMode] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme_mode') === 'light';
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    if (isWhiteMode) {
+      document.documentElement.classList.add('white-mode');
+    } else {
+      document.documentElement.classList.remove('white-mode');
+    }
+  }, [isWhiteMode]);
+
+  const handleToggleWhiteMode = () => {
+    setIsWhiteMode((prev) => {
+      const next = !prev;
+      localStorage.setItem('theme_mode', next ? 'light' : 'dark');
+      return next;
+    });
+  };
 
   return (
-    <div className="relative min-h-screen bg-[#080a0f] text-slate-200 selection:bg-cyan-500/30 selection:text-cyan-200 overflow-x-hidden font-sans">
+    <div
+      className={`relative min-h-screen selection:bg-cyan-500/30 selection:text-cyan-200 overflow-x-hidden font-sans transition-colors duration-300 ${
+        isWhiteMode ? 'white-mode bg-[#f8fafc] text-slate-800' : 'bg-[#080a0f] text-slate-200'
+      }`}
+    >
       {/* Scroll Progress Bar */}
       <ScrollProgress />
 
-      {/* Interactive Anti-Gravity Canvas Backdrop */}
-      <ParticleCanvas />
+      {/* Interactive Anti-Gravity Canvas Backdrop with high dot density */}
+      <ParticleCanvas isWhiteMode={isWhiteMode} />
 
       {/* Top Bar Navigation */}
-      <Navbar onOpenResume={() => setIsResumeOpen(true)} />
+      <Navbar
+        onOpenResume={() => setIsResumeOpen(true)}
+        isWhiteMode={isWhiteMode}
+        onToggleWhiteMode={handleToggleWhiteMode}
+      />
 
       {/* Main Content Flow */}
       <main className="relative z-10">

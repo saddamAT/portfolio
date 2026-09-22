@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Copy, Check, MapPin, Sparkles, Linkedin, ArrowRight, Bot } from 'lucide-react';
 import { PROFILE } from '../data/portfolioData';
+import AntigravityLogo from './AntigravityLogo';
 
 export default function Hero() {
   const [copied, setCopied] = useState(false);
@@ -23,19 +24,21 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column: Value Proposition & Engineering Highlights */}
           <div className="lg:col-span-7 flex flex-col justify-center text-left">
-            {/* Tech badges strip */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-surface border border-brand-border text-xs text-cyan-300 w-fit mb-6 shadow-sm">
-              <span className="inline-block w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-              <span className="font-mono uppercase tracking-wider text-[11px] font-semibold text-slate-200">
-                Python · Next.js · Agentic AI · LLM Evals
-              </span>
+            {/* Google Antigravity Brand Chip */}
+            <div className="flex items-center gap-3 mb-5">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-surface/90 border border-brand-border text-xs text-slate-200 shadow-sm backdrop-blur-sm">
+                <AntigravityLogo className="w-4 h-4" />
+                <span className="font-semibold text-slate-100">Google Antigravity</span>
+                <span className="text-slate-500">·</span>
+                <span className="text-cyan-400 font-mono text-[11px]">Next-Gen Agent Systems</span>
+              </div>
             </div>
 
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15]">
-              Senior Full-Stack Engineer <br className="hidden sm:inline" />
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.12]">
+              Experience liftoff with <br className="hidden sm:inline" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-300">
-                Building Production AI SaaS.
+                production AI architectures.
               </span>
             </h1>
 
