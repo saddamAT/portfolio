@@ -53,7 +53,7 @@ export default function SkillsGrid() {
             Verified Engineering Stack
           </h2>
           <p className="mt-3 text-slate-300 text-sm">
-            Categorized capabilities built over 8+ years of production delivery without arbitrary percentage meters.
+            Categorized capabilities built over years of production delivery without arbitrary percentage meters.
           </p>
 
           {/* Interactive Filter Controls (Functional button tabs) */}

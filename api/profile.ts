@@ -4,7 +4,7 @@ export default function handler(_req: Request, res: Response) {
   res.status(200).json({
     name: 'Saddam Hussain',
     title: 'Senior Full Stack Engineer & AI Systems Architect',
-    yoe: '8+',
+    level: 'Senior / Staff',
     location: 'Lahore, Pakistan (Open to Global Remote)',
     email: 'saddamhussainuos04@gmail.com',
     phone: '+92 317 4016016',

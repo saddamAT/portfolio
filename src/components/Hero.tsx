@@ -44,7 +44,7 @@ export default function Hero() {
 
             {/* Bio summary */}
             <p className="mt-6 text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl font-normal">
-              8+ years building and shipping high-throughput production web applications, specializing in{' '}
+              Senior engineer building and shipping high-throughput production web applications, specializing in{' '}
               <span className="text-white font-medium">Python (Django DRF, FastAPI)</span>,{' '}
               <span className="text-white font-medium">TypeScript (Next.js, React)</span>, and{' '}
               <span className="text-cyan-300 font-medium">Multi-Agent AI Automations</span>. Proven track record
@@ -130,9 +130,6 @@ export default function Hero() {
                     <div>
                       <h3 className="text-white font-bold text-lg leading-tight">Saddam Hussain</h3>
                       <p className="text-xs text-cyan-400 font-mono">Senior Full Stack Engineer</p>
-                    </div>
-                    <div className="px-2.5 py-1 rounded bg-cyan-950/80 border border-cyan-700/60 text-cyan-300 text-[11px] font-mono">
-                      8+ YOE
                     </div>
                   </div>
                   <p className="text-xs text-slate-400 mt-2 font-mono flex items-center gap-1.5">
