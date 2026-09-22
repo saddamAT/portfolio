@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import ParticleCanvas from './components/ParticleCanvas';
+import ScrollProgress from './components/ScrollProgress';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import MetricsStrip from './components/MetricsStrip';
@@ -17,6 +18,9 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-[#080a0f] text-slate-200 selection:bg-cyan-500/30 selection:text-cyan-200 overflow-x-hidden font-sans">
+      {/* Scroll Progress Bar */}
+      <ScrollProgress />
+
       {/* Interactive Anti-Gravity Canvas Backdrop */}
       <ParticleCanvas />
 
