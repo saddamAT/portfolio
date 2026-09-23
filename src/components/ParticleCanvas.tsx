@@ -4,6 +4,30 @@ interface ParticleCanvasProps {
   isWhiteMode?: boolean;
 }
 
+type ParticleType = 'circle' | 'glow-circle' | 'pill';
+
+interface AntigravityParticle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  baseVy: number;
+  type: ParticleType;
+  radius: number;
+  length: number;
+  angle: number;
+  vRot: number;
+  swaySpeed: number;
+  swayAmp: number;
+  swayOffset: number;
+  depth: number;
+  alpha: number;
+  baseAlpha: number;
+  color: string;
+  glowColor: string;
+  pulseSpeed: number;
+}
+
 export default function ParticleCanvas({ isWhiteMode = false }: ParticleCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -11,334 +35,273 @@ export default function ParticleCanvas({ isWhiteMode = false }: ParticleCanvasPr
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
-
+    let width = window.innerWidth;
+    let height = window.innerHeight;
     let animationFrameId: number;
-    const mouse = { x: -1000, y: -1000, vx: 0, vy: 0, lastX: -1000, lastY: -1000, radius: 190 };
+    let time = 0;
 
-    const handleResize = () => {
-      if (!canvas) return;
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+    // Device Pixel Ratio for ultra-crisp circles & geometry
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    const resizeCanvas = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+
+    resizeCanvas();
+
+    const mouse = {
+      x: -2000,
+      y: -2000,
+      radius: 170,
+      active: false,
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      mouse.vx = e.clientX - mouse.x;
-      mouse.vy = e.clientY - mouse.y;
       mouse.x = e.clientX;
       mouse.y = e.clientY;
+      mouse.active = true;
     };
 
     const handleMouseLeave = () => {
-      mouse.x = -1000;
-      mouse.y = -1000;
-      mouse.vx = 0;
-      mouse.vy = 0;
+      mouse.x = -2000;
+      mouse.y = -2000;
+      mouse.active = false;
     };
 
-    // Click produces an anti-gravity outward shockwave blast
-    const handleClick = (e: MouseEvent) => {
-      const clickX = e.clientX;
-      const clickY = e.clientY;
-      const blastRadius = 320;
+    // Palettes calibrated for Antigravity aesthetic
+    // Dark mode: vibrant neon/Google colors on deep space (#080a0f)
+    const darkPalette = [
+      { color: '#00F0FF', glow: 'rgba(0, 240, 255, 0.45)' }, // Electric Cyan
+      { color: '#38BDF8', glow: 'rgba(56, 189, 248, 0.4)' },  // Sky Blue
+      { color: '#4285F4', glow: 'rgba(66, 133, 244, 0.45)' }, // Google Blue
+      { color: '#34A853', glow: 'rgba(52, 168, 83, 0.45)' },  // Google Green
+      { color: '#FBBC05', glow: 'rgba(251, 188, 5, 0.45)' },  // Google Yellow
+      { color: '#EA4335', glow: 'rgba(234, 67, 53, 0.45)' },  // Google Coral/Red
+      { color: '#E879F9', glow: 'rgba(232, 121, 249, 0.4)' }, // Radiant Magenta
+      { color: '#A855F7', glow: 'rgba(168, 85, 247, 0.4)' },  // Purple/Violet
+      { color: '#FFFFFF', glow: 'rgba(255, 255, 255, 0.5)' }, // Crisp White
+    ];
+
+    // Light mode: rich, high-contrast jewel tones on light slate (#f8fafc)
+    const lightPalette = [
+      { color: '#2563EB', glow: 'rgba(37, 99, 235, 0.35)' },  // Deep Blue
+      { color: '#0284C7', glow: 'rgba(2, 132, 199, 0.35)' },  // Deep Cyan
+      { color: '#059669', glow: 'rgba(5, 150, 105, 0.35)' },  // Emerald
+      { color: '#D97706', glow: 'rgba(217, 119, 6, 0.35)' },  // Warm Amber
+      { color: '#E11D48', glow: 'rgba(225, 29, 72, 0.35)' },  // Coral Crimson
+      { color: '#7C3AED', glow: 'rgba(124, 58, 237, 0.35)' }, // Royal Violet
+      { color: '#475569', glow: 'rgba(71, 85, 105, 0.25)' },  // Slate accent
+    ];
+
+    const currentPalette = isWhiteMode ? lightPalette : darkPalette;
+
+    let particles: AntigravityParticle[] = [];
+
+    const initParticles = () => {
+      particles = [];
+      // Dynamic count: ~70 on mobile, ~120 on wide screens
+      const baseCount = Math.floor((width * height) / 13000);
+      const count = Math.min(Math.max(baseCount, 65), 130);
+
+      for (let i = 0; i < count; i++) {
+        const rand = Math.random();
+        // Particle distribution: 65% circular dots, 35% antigravity pills
+        let type: ParticleType = 'circle';
+        if (rand < 0.5) {
+          type = 'circle'; // Standard circular dot
+        } else if (rand < 0.65) {
+          type = 'glow-circle'; // Hero luminous circular dot
+        } else {
+          type = 'pill'; // Floating antigravity capsule
+        }
+
+        const depth = Math.random() * 0.55 + 0.45; // 0.45 to 1.0 (depth layer)
+        const paletteItem = currentPalette[Math.floor(Math.random() * currentPalette.length)];
+
+        // Upward antigravity buoyancy: particles float upward naturally
+        const baseVy = -(Math.random() * 0.45 + 0.22) * depth;
+
+        let radius = 1.6;
+        let length = 0;
+
+        if (type === 'circle') {
+          // Sharp circular dot: 1.2px - 3.2px
+          radius = (Math.random() * 1.8 + 1.2) * depth;
+        } else if (type === 'glow-circle') {
+          // Luminous circular dot: 3.5px - 5.5px
+          radius = (Math.random() * 2.2 + 3.2) * depth;
+        } else {
+          // Antigravity pill/capsule: width 2.2 - 3.4px, length 10 - 22px
+          radius = (Math.random() * 0.8 + 1.2) * depth;
+          length = (Math.random() * 12 + 10) * depth;
+        }
+
+        const baseAlpha = isWhiteMode
+          ? Math.random() * 0.35 + 0.45 // Slightly higher opacity on light background
+          : Math.random() * 0.45 + 0.4;  // Vibrant opacity on dark background
+
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: 0,
+          vy: baseVy,
+          baseVy,
+          type,
+          radius,
+          length,
+          angle: Math.random() * Math.PI * 2,
+          vRot: (Math.random() - 0.5) * 0.024,
+          swaySpeed: Math.random() * 0.015 + 0.008,
+          swayAmp: Math.random() * 24 + 10,
+          swayOffset: Math.random() * Math.PI * 2,
+          depth,
+          alpha: baseAlpha,
+          baseAlpha,
+          color: paletteItem.color,
+          glowColor: paletteItem.glow,
+          pulseSpeed: Math.random() * 0.03 + 0.015,
+        });
+      }
+    };
+
+    initParticles();
+
+    const handleResize = () => {
+      resizeCanvas();
+      initParticles();
+    };
+
+    const animate = () => {
+      time += 1;
+      ctx.clearRect(0, 0, width, height);
 
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
-        const dx = p.x - clickX;
-        const dy = p.y - clickY;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < blastRadius && dist > 0) {
-          const force = ((blastRadius - dist) / blastRadius) * 11;
-          p.vx += (dx / dist) * force;
-          p.vy += (dy / dist) * force - 3.5; // Antigravity upward impulse
+
+        // Horizontal sinusoidal sway simulating zero-G weightless drift
+        const sway = Math.sin(time * p.swaySpeed + p.swayOffset) * p.swayAmp;
+        const currentX = p.x + sway;
+        const currentY = p.y;
+
+        // Interactive Antigravity Repulsion on cursor hover
+        if (mouse.active) {
+          const dx = currentX - mouse.x;
+          const dy = currentY - mouse.y;
+          const dist = Math.hypot(dx, dy);
+
+          if (dist < mouse.radius && dist > 1) {
+            const force = ((mouse.radius - dist) / mouse.radius) * 2.8;
+            p.vx += (dx / dist) * force * 0.4;
+            p.vy += (dy / dist) * force * 0.4;
+          }
+        }
+
+        // Apply smooth velocity damping and return towards upward float
+        p.vx *= 0.93;
+        p.vy = p.vy * 0.93 + p.baseVy * 0.07;
+
+        p.x += p.vx;
+        p.y += p.vy;
+        p.angle += p.vRot;
+
+        // Wrap around viewport bounds
+        if (p.y < -35) {
+          p.y = height + 35;
+          p.x = Math.random() * width;
+        } else if (p.y > height + 35) {
+          p.y = -35;
+          p.x = Math.random() * width;
+        }
+
+        if (p.x < -40) {
+          p.x = width + 40;
+        } else if (p.x > width + 40) {
+          p.x = -40;
+        }
+
+        // Render based on particle geometry
+        if (p.type === 'circle') {
+          // Perfectly round, pristine circular dot
+          ctx.beginPath();
+          ctx.arc(currentX, currentY, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = p.alpha;
+          ctx.fill();
+        } else if (p.type === 'glow-circle') {
+          // Luminous hero circular dot with soft radial glow
+          const pulse = Math.sin(time * p.pulseSpeed) * 0.35 + 1;
+          const r = p.radius * pulse;
+          const glowRadius = r * 2.6;
+
+          // Ambient luminous aura
+          const grad = ctx.createRadialGradient(currentX, currentY, r * 0.3, currentX, currentY, glowRadius);
+          grad.addColorStop(0, p.color);
+          grad.addColorStop(0.5, p.glowColor);
+          grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+          ctx.beginPath();
+          ctx.arc(currentX, currentY, glowRadius, 0, Math.PI * 2);
+          ctx.fillStyle = grad;
+          ctx.globalAlpha = p.alpha * 0.7;
+          ctx.fill();
+
+          // Core crisp circular dot
+          ctx.beginPath();
+          ctx.arc(currentX, currentY, r, 0, Math.PI * 2);
+          ctx.fillStyle = isWhiteMode ? p.color : '#ffffff';
+          ctx.globalAlpha = p.alpha;
+          ctx.fill();
+        } else if (p.type === 'pill') {
+          // Floating antigravity capsule / pill (like Google Antigravity confetti)
+          ctx.save();
+          ctx.translate(currentX, currentY);
+          ctx.rotate(p.angle);
+          ctx.beginPath();
+          ctx.strokeStyle = p.color;
+          ctx.lineWidth = p.radius * 2;
+          ctx.lineCap = 'round';
+          ctx.globalAlpha = p.alpha;
+
+          const halfLen = Math.max(1, p.length / 2 - p.radius);
+          ctx.moveTo(-halfLen, 0);
+          ctx.lineTo(halfLen, 0);
+          ctx.stroke();
+          ctx.restore();
         }
       }
+
+      ctx.globalAlpha = 1;
+      animationFrameId = requestAnimationFrame(animate);
     };
+
+    animationFrameId = requestAnimationFrame(animate);
 
     window.addEventListener('resize', handleResize);
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseleave', handleMouseLeave);
-    window.addEventListener('click', handleClick);
-
-    // Color palettes inspired by Google Antigravity spectrum:
-    // Left: Cobalt Blues, Cyan, Indigo, Violet
-    // Center: Cyan, Teal, Emerald Green
-    // Right: Amber Gold, Coral Orange, Crimson Red, Deep Slate
-    const darkPalette = [
-      '#4285F4', // Google Blue
-      '#24C1E0', // Cyan
-      '#6366F1', // Indigo
-      '#A855F7', // Purple
-      '#EC4899', // Pink
-      '#EA4335', // Google Red / Coral
-      '#FF7043', // Orange
-      '#FBBC05', // Google Yellow / Amber
-      '#34A853', // Google Green
-      '#FFFFFF', // Pure White Star
-      '#94A3B8', // Silver Slate
-    ];
-
-    const whitePalette = [
-      '#1A73E8', // Rich Google Blue
-      '#0284C7', // Deep Sky
-      '#06B6D4', // Vibrant Cyan
-      '#7C3AED', // Vivid Violet
-      '#D946EF', // Fuchsia
-      '#EA4335', // Coral Red
-      '#F97316', // Bright Tangerine
-      '#F59E0B', // Warm Amber
-      '#10B981', // Emerald
-      '#0F172A', // Crisp Charcoal Slate
-      '#334155', // Slate
-    ];
-
-    class AntigravityParticle {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      baseSpeedX: number;
-      baseSpeedY: number;
-      length: number;
-      thickness: number;
-      isCapsule: boolean;
-      color: string;
-      alpha: number;
-      angle: number;
-      targetAngle: number;
-      rotationSpeed: number;
-      orbitCenterX: number;
-      orbitCenterY: number;
-      orbitRadius: number;
-      orbitAngle: number;
-      orbitSpeed: number;
-      pulsePhase: number;
-      pulseSpeed: number;
-
-      constructor(whiteMode: boolean) {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-
-        // Shape type: 65% elongated capsules/dashes, 35% circular speckles
-        this.isCapsule = Math.random() < 0.68;
-        if (this.isCapsule) {
-          this.length = Math.random() * 6.5 + 4.5; // 4.5 to 11px
-          this.thickness = Math.random() * 1.4 + 2.0; // 2.0 to 3.4px
-        } else {
-          this.length = Math.random() * 1.8 + 1.2; // Tiny dot radius
-          this.thickness = this.length;
-        }
-
-        // Chromatic placement based on horizontal location across screen
-        const xRatio = this.x / Math.max(width, 1);
-        const palette = whiteMode ? whitePalette : darkPalette;
-
-        let colorIndex: number;
-        const colorRand = Math.random();
-
-        if (colorRand < 0.12) {
-          // Charcoal / Slate specks sprinkled everywhere
-          colorIndex = whiteMode ? 9 : 9;
-        } else if (xRatio < 0.35) {
-          // Left side: Blues, Cyans, Purples, Violets
-          const leftColors = [0, 1, 2, 3, 4];
-          colorIndex = leftColors[Math.floor(Math.random() * leftColors.length)];
-        } else if (xRatio < 0.65) {
-          // Center: Cyans, Blues, Greens, Purples
-          const centerColors = [1, 2, 8, 3, 0];
-          colorIndex = centerColors[Math.floor(Math.random() * centerColors.length)];
-        } else {
-          // Right side: Reds, Corals, Oranges, Ambers, Greens
-          const rightColors = [5, 6, 7, 8, 10];
-          colorIndex = rightColors[Math.floor(Math.random() * rightColors.length)];
-        }
-
-        this.color = palette[colorIndex];
-        this.alpha = Math.random() * 0.35 + (whiteMode ? 0.65 : 0.6);
-
-        // Orbital flow properties
-        this.orbitCenterX = width * 0.45 + (Math.random() - 0.5) * 200;
-        this.orbitCenterY = height * 0.4 + (Math.random() - 0.5) * 200;
-        this.orbitRadius = Math.hypot(this.x - this.orbitCenterX, this.y - this.orbitCenterY);
-        this.orbitAngle = Math.atan2(this.y - this.orbitCenterY, this.x - this.orbitCenterX);
-        this.orbitSpeed = (Math.random() * 0.0018 + 0.0006) * (Math.random() < 0.5 ? 1 : -1);
-
-        // Ambient anti-gravity drift (gentle floating upwards & outwards)
-        this.baseSpeedX = (Math.random() - 0.5) * 0.35;
-        this.baseSpeedY = -Math.random() * 0.3 - 0.08;
-        this.vx = this.baseSpeedX;
-        this.vy = this.baseSpeedY;
-
-        this.angle = this.orbitAngle + Math.PI / 2;
-        this.targetAngle = this.angle;
-        this.rotationSpeed = Math.random() * 0.04 + 0.01;
-
-        this.pulsePhase = Math.random() * Math.PI * 2;
-        this.pulseSpeed = Math.random() * 0.03 + 0.01;
-      }
-
-      update() {
-        this.pulsePhase += this.pulseSpeed;
-
-        // Orbit update
-        this.orbitAngle += this.orbitSpeed;
-        const targetOrbitX = this.orbitCenterX + Math.cos(this.orbitAngle) * this.orbitRadius;
-        const targetOrbitY = this.orbitCenterY + Math.sin(this.orbitAngle) * this.orbitRadius;
-
-        // Flow towards orbital track with loose spring physics
-        const orbitDx = targetOrbitX - this.x;
-        const orbitDy = targetOrbitY - this.y;
-        this.vx += orbitDx * 0.0007;
-        this.vy += orbitDy * 0.0007;
-
-        // Apply velocities with anti-gravity upward bias
-        this.x += this.vx;
-        this.y += this.vy;
-
-        // Friction dampening
-        this.vx *= 0.96;
-        this.vy *= 0.96;
-
-        // Maintain minimum float
-        if (Math.abs(this.vx) < 0.08) this.vx += this.baseSpeedX * 0.5;
-        if (Math.abs(this.vy) < 0.08) this.vy += this.baseSpeedY * 0.5;
-
-        // Antigravity repulsion from cursor
-        const dx = mouse.x - this.x;
-        const dy = mouse.y - this.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < mouse.radius && dist > 0) {
-          const force = ((mouse.radius - dist) / mouse.radius);
-          // Push away radially
-          const pushX = (dx / dist) * force * 5.2;
-          const pushY = (dy / dist) * force * 5.2;
-          this.vx -= pushX;
-          this.vy -= pushY;
-
-          // Align capsule angle with acceleration vector (liftoff streak)
-          this.targetAngle = Math.atan2(this.vy, this.vx);
-        } else {
-          // When floating, orient along orbit streamline or motion
-          const speed = Math.hypot(this.vx, this.vy);
-          if (speed > 0.4) {
-            this.targetAngle = Math.atan2(this.vy, this.vx);
-          } else {
-            this.targetAngle = this.orbitAngle + Math.PI / 2 + Math.sin(this.pulsePhase) * 0.3;
-          }
-        }
-
-        // Smooth rotation interpolation
-        let diff = this.targetAngle - this.angle;
-        while (diff < -Math.PI) diff += Math.PI * 2;
-        while (diff > Math.PI) diff -= Math.PI * 2;
-        this.angle += diff * 0.08;
-
-        // Boundary wrap
-        const pad = 30;
-        if (this.x < -pad) {
-          this.x = width + pad;
-          this.orbitCenterX = width * 0.45;
-        }
-        if (this.x > width + pad) {
-          this.x = -pad;
-          this.orbitCenterX = width * 0.45;
-        }
-        if (this.y < -pad) {
-          this.y = height + pad;
-          this.orbitCenterY = height * 0.4;
-        }
-        if (this.y > height + pad) {
-          this.y = -pad;
-          this.orbitCenterY = height * 0.4;
-        }
-      }
-
-      draw() {
-        if (!ctx) return;
-        const currentAlpha = Math.min(Math.max(this.alpha + Math.sin(this.pulsePhase) * 0.15, 0.2), 1);
-
-        ctx.save();
-        ctx.translate(this.x, this.y);
-        ctx.rotate(this.angle);
-
-        ctx.fillStyle = this.color;
-        ctx.globalAlpha = currentAlpha;
-
-        if (this.isCapsule) {
-          // Dynamic stretch on high velocity (liftoff effect)
-          const speed = Math.hypot(this.vx, this.vy);
-          const dynamicLen = this.length + Math.min(speed * 3.5, 12);
-          const halfLen = dynamicLen / 2;
-          const halfThick = this.thickness / 2;
-
-          ctx.beginPath();
-          if (typeof ctx.roundRect === 'function') {
-            ctx.roundRect(-halfLen, -halfThick, dynamicLen, this.thickness, halfThick);
-          } else {
-            ctx.arc(-halfLen + halfThick, 0, halfThick, Math.PI / 2, (Math.PI * 3) / 2);
-            ctx.arc(halfLen - halfThick, 0, halfThick, (Math.PI * 3) / 2, Math.PI / 2);
-            ctx.closePath();
-          }
-          ctx.fill();
-
-          // Soft glow halo on vibrant particles in dark mode
-          if (!isWhiteMode && this.length > 7) {
-            ctx.shadowColor = this.color;
-            ctx.shadowBlur = 6;
-          }
-        } else {
-          // Circular speckle / confetti dot
-          ctx.beginPath();
-          ctx.arc(0, 0, this.length, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        ctx.restore();
-      }
-    }
-
-    // High density count matching Google Antigravity (180 to 280 particles)
-    const count = Math.min(Math.max(Math.floor(window.innerWidth / 5.5), 160), 280);
-    const particles: AntigravityParticle[] = [];
-    for (let i = 0; i < count; i++) {
-      particles.push(new AntigravityParticle(isWhiteMode));
-    }
-
-    const render = () => {
-      ctx.clearRect(0, 0, width, height);
-
-      // Render all Google Antigravity particles
-      for (let i = 0; i < particles.length; i++) {
-        particles[i].update();
-        particles[i].draw();
-      }
-
-      animationFrameId = requestAnimationFrame(render);
-    };
-
-    render();
 
     return () => {
+      cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseleave', handleMouseLeave);
-      window.removeEventListener('click', handleClick);
-      cancelAnimationFrame(animationFrameId);
     };
   }, [isWhiteMode]);
 
   return (
     <canvas
       ref={canvasRef}
-      className={`fixed inset-0 pointer-events-none z-0 transition-opacity duration-700 ${
-        isWhiteMode ? 'opacity-90' : 'opacity-85'
-      }`}
       aria-hidden="true"
+      className="fixed inset-0 pointer-events-none z-0 transition-opacity duration-500"
     />
   );
 }

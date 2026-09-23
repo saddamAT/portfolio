@@ -1,4 +1,4 @@
-import { X, Printer, Download, Mail, Phone, MapPin, ExternalLink } from 'lucide-react';
+import { X, Printer, Mail, Phone, MapPin } from 'lucide-react';
 import { PROFILE, EXPERIENCES, SKILL_CATEGORIES } from '../data/portfolioData';
 
 interface ResumeModalProps {
@@ -17,10 +17,10 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md overflow-y-auto">
       <div className="relative w-full max-w-4xl bg-brand-surface border border-brand-border rounded-2xl shadow-2xl overflow-hidden my-auto max-h-[95vh] flex flex-col">
         {/* Top Modal Controls */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-brand-border bg-brand-dark/95">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-brand-border bg-brand-surface">
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-cyan-400" />
-            <span className="text-xs font-mono font-bold uppercase text-slate-200 tracking-wider">
+            <span className="text-xs font-mono font-bold uppercase text-white tracking-wider">
               Curriculum Vitae · Senior Full Stack & AI Systems Architect
             </span>
           </div>
@@ -29,7 +29,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
             <button
               type="button"
               onClick={handlePrint}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-elevated hover:bg-brand-border text-slate-200 text-xs font-mono border border-brand-border transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-elevated hover:bg-brand-border text-white text-xs font-mono border border-brand-border transition-colors cursor-pointer"
             >
               <Printer className="w-3.5 h-3.5 text-cyan-400" />
               <span>Print / Save PDF</span>
@@ -37,7 +37,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-brand-elevated transition-colors"
+              className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-brand-elevated transition-colors cursor-pointer"
               aria-label="Close CV Modal"
             >
               <X className="w-5 h-5" />
@@ -46,7 +46,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
         </div>
 
         {/* Printable CV Document Content */}
-        <div className="p-6 sm:p-10 overflow-y-auto space-y-8 bg-slate-950 text-slate-200 font-sans text-sm print:bg-white print:text-black print:p-0">
+        <div className="p-6 sm:p-10 overflow-y-auto space-y-8 bg-brand-surface text-slate-200 font-sans text-sm print:bg-white print:text-black print:p-0">
           {/* Header */}
           <div className="border-b border-brand-border pb-6">
             <h1 className="text-3xl font-extrabold text-white tracking-tight">{PROFILE.name}</h1>
@@ -83,7 +83,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
               {SKILL_CATEGORIES.map((cat) => (
-                <div key={cat.name} className="p-3 rounded-lg bg-brand-surface border border-brand-border/80">
+                <div key={cat.name} className="p-3 rounded-lg bg-brand-elevated border border-brand-border">
                   <span className="font-semibold text-white block mb-1">{cat.name}:</span>
                   <span className="text-slate-300">{cat.skills.join(', ')}</span>
                 </div>
@@ -101,7 +101,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                 <div key={exp.company} className="border-l-2 border-brand-border pl-4">
                   <div className="flex flex-wrap items-center justify-between gap-1">
                     <h3 className="font-bold text-white text-base">{exp.title}</h3>
-                    <span className="text-xs font-mono text-cyan-300">{exp.period}</span>
+                    <span className="text-xs font-mono text-cyan-400 font-medium">{exp.period}</span>
                   </div>
                   <div className="text-xs font-mono text-slate-400 mb-2">
                     {exp.company} · {exp.location}
@@ -119,28 +119,17 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
           {/* Education */}
           <div className="border-t border-brand-border pt-4">
             <h2 className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold mb-2">
-              Education & Degrees
+              Education & Credentials
             </h2>
-            <div className="flex justify-between items-center text-xs">
-              <div>
-                <span className="font-bold text-white">Bachelor of Science in Computer Science (BSCS)</span>
-                <p className="text-slate-400 font-mono">University of Sargodha (UOS)</p>
+            <div className="text-xs space-y-1">
+              <div className="font-semibold text-white">
+                Bachelor of Science in Information Technology (BS IT)
               </div>
-              <span className="text-slate-400 font-mono">2014 – 2018</span>
+              <div className="text-slate-400 font-mono">
+                University of the Punjab, Lahore · 2013 – 2017
+              </div>
             </div>
           </div>
-        </div>
-
-        {/* Footer actions */}
-        <div className="p-4 border-t border-brand-border bg-brand-dark flex items-center justify-between">
-          <span className="text-xs text-slate-400 font-mono">Ready for Senior Roles & Architecture Consulting</span>
-          <button
-            type="button"
-            onClick={onClose}
-            className="px-4 py-2 rounded-lg bg-brand-elevated hover:bg-brand-border text-white text-xs font-mono"
-          >
-            Close
-          </button>
         </div>
       </div>
     </div>

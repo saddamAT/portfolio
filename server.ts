@@ -45,16 +45,16 @@ async function startServer() {
       email: 'saddamhussainuos04@gmail.com',
       phone: '+92 317 4016016',
       status: 'Open for Senior Roles & High-Impact Consulting',
-      headline: 'Building Production AI SaaS with Next.js, Python, and Multi-Agent Systems',
+      headline: 'Building Production AI SaaS with Next.js, Python, and Modern Cloud Architectures',
       highlights: [
         '8+ years building and shipping high-throughput production web applications',
-        'Specializing in Python (Django DRF, FastAPI), TypeScript (Next.js, React), and Agentic AI',
+        'Specializing in Python (Django DRF, FastAPI), TypeScript (Next.js, React), and Production AI',
         'Proven track record designing OCR document pipelines, WebSocket RPA bridges, and resilient cloud architectures',
       ],
       metrics: [
         { label: 'Years Production Exp', value: '8+' },
         { label: 'Companies Scaled', value: '5+' },
-        { label: 'AI Workflow Engines', value: 'Multi-Agent' },
+        { label: 'AI Workflow Engines', value: 'Production' },
         { label: 'Production Deployments', value: 'AWS & Docker' },
         { label: 'Architecture to Launch', value: '0 to 1 & Scale' },
       ],
@@ -111,8 +111,8 @@ async function startServer() {
     }
   });
 
-  // Interactive Multi-Agent Pipeline Simulator Endpoint
-  app.post('/api/agent-pipeline/run', (req: Request, res: Response) => {
+  // Interactive Pipeline Simulator Endpoint (handles both /api/pipeline/run and legacy /api/agent-pipeline/run)
+  const handlePipelineRun = (req: Request, res: Response) => {
     try {
       const { invoiceNumber = 'INV-2026-0842', vendor = 'CloudScale Dynamics LLC', amount = 14850.0 } = req.body;
 
@@ -126,14 +126,14 @@ async function startServer() {
         },
         {
           step: 2,
-          name: 'Step Agent State Graph Routing',
+          name: 'Orchestration State Graph Routing',
           status: 'COMPLETED',
           latencyMs: 88,
           details: 'Evaluated deterministic business rules against approval thresholds. Verified PO alignment and payment term compliance.',
         },
         {
           step: 3,
-          name: 'DB Agent Relational Verification',
+          name: 'Relational Database Verification',
           status: 'COMPLETED',
           latencyMs: 65,
           details: 'Executed parameterized PostgreSQL query to check vendor tax ID and duplicate hash checks. Schema verified without locking.',
@@ -168,7 +168,10 @@ async function startServer() {
         error: 'Pipeline simulation execution failure.',
       });
     }
-  });
+  };
+
+  app.post('/api/pipeline/run', handlePipelineRun);
+  app.post('/api/agent-pipeline/run', handlePipelineRun);
 
   // Vite integration
   if (process.env.NODE_ENV === 'production') {

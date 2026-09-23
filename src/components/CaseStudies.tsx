@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Layers, CheckCircle2, Server, ArrowRight, ExternalLink, X, Cpu } from 'lucide-react';
+import { Layers, CheckCircle2, X } from 'lucide-react';
 import { CASE_STUDIES } from '../data/portfolioData';
 import type { CaseStudy } from '../types';
 
@@ -26,11 +26,10 @@ export default function CaseStudies() {
 
         {/* Case Studies Stack */}
         <div className="space-y-12">
-          {/* Case Study 1: Aimyable */}
           {CASE_STUDIES.map((study) => (
             <article
               key={study.id}
-              className="glass-card rounded-2xl p-6 sm:p-8 lg:p-10 border border-brand-border/90 relative overflow-hidden transition-all duration-300 hover:border-cyan-500/40"
+              className="glass-card rounded-2xl p-6 sm:p-8 lg:p-10 border border-brand-border relative overflow-hidden transition-all duration-300 hover:border-cyan-500/40"
             >
               {study.id === 'aimyable' && (
                 <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -42,10 +41,10 @@ export default function CaseStudies() {
                   <span
                     className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono border ${
                       study.id === 'aimyable'
-                        ? 'bg-cyan-950 text-cyan-300 border-cyan-800'
+                        ? 'bg-cyan-950/80 text-cyan-300 border-cyan-800'
                         : study.id === 'udu-com'
-                        ? 'bg-blue-950 text-blue-300 border-blue-800'
-                        : 'bg-indigo-950 text-indigo-300 border-indigo-800'
+                        ? 'bg-blue-950/80 text-blue-300 border-blue-800'
+                        : 'bg-indigo-950/80 text-indigo-300 border-indigo-800'
                     }`}
                   >
                     <span
@@ -59,14 +58,16 @@ export default function CaseStudies() {
                     />
                     {study.flagshipBadge}
                   </span>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white mt-2">{study.title}</h3>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white mt-2">
+                    {study.title}
+                  </h3>
                 </div>
 
                 <div className="flex flex-wrap gap-1.5">
                   {study.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="px-2.5 py-1 rounded bg-brand-elevated text-slate-300 text-xs font-mono border border-brand-border/60"
+                      className="px-2.5 py-1 rounded bg-brand-elevated text-slate-300 text-xs font-mono border border-brand-border"
                     >
                       {tech}
                     </span>
@@ -82,7 +83,9 @@ export default function CaseStudies() {
                     <h4 className="text-xs font-semibold uppercase font-mono tracking-wider text-cyan-400">
                       The Problem & Architecture Challenge
                     </h4>
-                    <p className="text-slate-300 text-sm mt-2 leading-relaxed">{study.problem}</p>
+                    <p className="text-slate-300 text-sm mt-2 leading-relaxed">
+                      {study.problem}
+                    </p>
                   </div>
 
                   <div>
@@ -114,7 +117,7 @@ export default function CaseStudies() {
                 {/* Right Column: Interactive Architecture Box */}
                 <div className="lg:col-span-5 bg-brand-surface rounded-xl p-5 border border-brand-border flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center justify-between border-b border-brand-border/60 pb-3 mb-4">
+                    <div className="flex items-center justify-between border-b border-brand-border pb-3 mb-4">
                       <span className="font-mono text-xs text-slate-300 font-bold uppercase tracking-wider">
                         {study.id === 'aimyable'
                           ? 'Aimyable Architecture Flow'
@@ -122,7 +125,7 @@ export default function CaseStudies() {
                           ? 'Udu.com Pipeline Flow'
                           : 'Banyo POS Distributed Sync'}
                       </span>
-                      <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800 flex items-center gap-1">
+                      <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-800 flex items-center gap-1 font-semibold">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                         Production Live
                       </span>
@@ -156,8 +159,12 @@ export default function CaseStudies() {
                     <div className="grid grid-cols-2 gap-2 text-center">
                       {study.impact.map((item, idx) => (
                         <div key={idx} className="p-2 rounded bg-brand-elevated border border-brand-border/50">
-                          <div className="text-base font-bold text-cyan-400 font-mono">{item.metric}</div>
-                          <div className="text-[10px] text-slate-400 font-medium mt-0.5">{item.label}</div>
+                          <div className="text-base font-bold text-cyan-400 font-mono">
+                            {item.metric}
+                          </div>
+                          <div className="text-[10px] text-slate-400 font-medium mt-0.5">
+                            {item.label}
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -176,14 +183,14 @@ export default function CaseStudies() {
             <button
               type="button"
               onClick={() => setSelectedStudy(null)}
-              className="absolute top-5 right-5 p-2 rounded-lg bg-brand-elevated text-slate-400 hover:text-white hover:bg-brand-border transition-colors"
+              className="absolute top-5 right-5 p-2 rounded-lg bg-brand-elevated text-slate-400 hover:text-white hover:bg-brand-border transition-colors cursor-pointer"
               aria-label="Close modal"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="mb-6">
-              <span className="text-xs font-mono text-cyan-400 uppercase tracking-wider">
+              <span className="text-xs font-mono text-cyan-400 uppercase tracking-wider font-semibold">
                 Technical Architecture Specification
               </span>
               <h3 className="text-2xl font-bold text-white mt-1">{selectedStudy.title}</h3>
@@ -241,7 +248,7 @@ export default function CaseStudies() {
                 <button
                   type="button"
                   onClick={() => setSelectedStudy(null)}
-                  className="px-4 py-2 rounded-lg bg-brand-elevated text-slate-300 hover:text-white text-xs font-mono border border-brand-border"
+                  className="px-4 py-2 rounded-lg bg-brand-elevated text-slate-300 hover:text-white text-xs font-mono border border-brand-border cursor-pointer"
                 >
                   Close
                 </button>

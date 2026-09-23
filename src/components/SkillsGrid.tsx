@@ -42,7 +42,7 @@ export default function SkillsGrid() {
   });
 
   return (
-    <section className="py-20 bg-brand-surface relative border-t border-brand-border" id="skills">
+    <section className="py-20 bg-brand-surface/75 backdrop-blur-sm relative border-t border-brand-border" id="skills">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
@@ -95,7 +95,7 @@ export default function SkillsGrid() {
                   <div
                     className={`w-10 h-10 rounded-xl border flex items-center justify-center ${
                       isAI
-                        ? 'bg-purple-500/10 border-purple-500/30'
+                        ? 'bg-purple-500/10 border-purple-500/30 text-purple-400'
                         : isBackend
                         ? 'bg-blue-500/10 border-blue-500/30 text-blue-400'
                         : isFrontend
@@ -113,7 +113,7 @@ export default function SkillsGrid() {
                     const isKeySkill =
                       skill === 'Python' ||
                       skill === 'TypeScript' ||
-                      skill === 'Multi-Agent Systems' ||
+                      skill === 'Production AI Pipelines' ||
                       skill === 'Next.js (App Router)' ||
                       skill === 'PostgreSQL' ||
                       skill === 'AWS (EC2, S3)' ||

@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Copy, Check, MapPin, Sparkles, Linkedin, ArrowRight, Bot } from 'lucide-react';
+import { Copy, Check, MapPin, Sparkles, Linkedin, ArrowRight, Server } from 'lucide-react';
 import { PROFILE } from '../data/portfolioData';
-import AntigravityLogo from './AntigravityLogo';
 
 export default function Hero() {
   const [copied, setCopied] = useState(false);
@@ -24,21 +23,21 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column: Value Proposition & Engineering Highlights */}
           <div className="lg:col-span-7 flex flex-col justify-center text-left">
-            {/* Google Antigravity Brand Chip */}
+            {/* Engineering Focus Chip */}
             <div className="flex items-center gap-3 mb-5">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-surface/90 border border-brand-border text-xs text-slate-200 shadow-sm backdrop-blur-sm">
-                <AntigravityLogo className="w-4 h-4" />
-                <span className="font-semibold text-slate-100">Google Antigravity</span>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-surface/90 border border-brand-border text-xs text-slate-300 shadow-sm backdrop-blur-sm">
+                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                <span className="font-semibold text-white">Senior Full-Stack Engineer</span>
                 <span className="text-slate-500">·</span>
-                <span className="text-cyan-400 font-mono text-[11px]">Next-Gen Agent Systems</span>
+                <span className="text-cyan-400 font-mono text-[11px]">Production AI & Cloud Systems</span>
               </div>
             </div>
 
             {/* Headline */}
             <h1 className="text-[clamp(2.5rem,5.5vw,4.5rem)] font-extrabold text-white tracking-tight leading-[1.12]">
-              Experience liftoff with <br className="hidden sm:inline" />
+              Senior Full-Stack Engineer <br className="hidden sm:inline" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-300">
-                production AI architectures.
+                Building Production AI SaaS.
               </span>
             </h1>
 
@@ -47,7 +46,7 @@ export default function Hero() {
               8+ years building and shipping high-throughput production web applications, specializing in{' '}
               <span className="text-white font-medium">Python (Django DRF, FastAPI)</span>,{' '}
               <span className="text-white font-medium">TypeScript (Next.js, React)</span>, and{' '}
-              <span className="text-cyan-300 font-medium">Multi-Agent AI Automations</span>. Proven track record
+              <span className="text-cyan-300 font-medium">Production AI Automations</span>. Proven track record
               designing OCR document pipelines, WebSocket RPA bridges, and resilient cloud architectures.
             </p>
 
@@ -125,31 +124,31 @@ export default function Hero() {
                 />
 
                 {/* Bottom Gradient Overlay for Identity Label */}
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-brand-dark via-brand-dark/80 to-transparent p-5 pt-14">
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-brand-dark via-brand-dark/80 to-transparent p-5 pt-14 text-white">
                   <div className="flex items-center justify-between">
                     <div>
                       <h3 className="text-white font-bold text-lg leading-tight">Saddam Hussain</h3>
-                      <p className="text-xs text-cyan-400 font-mono">Senior Full Stack Engineer</p>
+                      <p className="text-xs text-cyan-300 font-mono">Senior Full Stack Engineer</p>
                     </div>
                     <div className="px-2.5 py-1 rounded bg-cyan-950/80 border border-cyan-700/60 text-cyan-300 text-[11px] font-mono font-semibold shadow-sm">
                       8+ YOE
                     </div>
                   </div>
-                  <p className="text-xs text-slate-400 mt-2 font-mono flex items-center gap-1.5">
+                  <p className="text-xs text-slate-300 mt-2 font-mono flex items-center gap-1.5">
                     <span className="inline-block w-2 h-2 rounded-full bg-emerald-400" />
                     Stech Experts LTD · Aimyable SaaS
                   </p>
                 </div>
               </div>
 
-              {/* Floating Live Agent Architecture Chip */}
+              {/* Floating Tech Architecture Chip */}
               <div className="absolute -bottom-5 -left-4 sm:-left-6 glass-card p-3 rounded-xl border border-cyan-500/40 shadow-xl hidden sm:flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-mono font-bold text-sm">
-                  <Bot className="w-4 h-4" />
+                  <Server className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="text-[11px] font-semibold text-white">Agentic Orchestration</div>
-                  <div className="text-[10px] text-slate-400 font-mono">Step Agent ➔ RPA WebSocket</div>
+                  <div className="text-[11px] font-semibold text-white">Full-Stack Architecture</div>
+                  <div className="text-[10px] text-slate-400 font-mono">Cloud Pipelines & Microservices</div>
                 </div>
               </div>
             </div>

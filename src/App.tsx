@@ -25,8 +25,10 @@ export default function App() {
   useEffect(() => {
     if (isWhiteMode) {
       document.documentElement.classList.add('white-mode');
+      document.documentElement.classList.remove('dark');
     } else {
       document.documentElement.classList.remove('white-mode');
+      document.documentElement.classList.add('dark');
     }
   }, [isWhiteMode]);
 
@@ -47,7 +49,7 @@ export default function App() {
       {/* Scroll Progress Bar */}
       <ScrollProgress />
 
-      {/* Interactive Anti-Gravity Canvas Backdrop with high dot density */}
+      {/* Interactive Constellation Canvas Backdrop */}
       <ParticleCanvas isWhiteMode={isWhiteMode} />
 
       {/* Top Bar Navigation */}

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { ArrowUpRight, Menu, X, FileText, Sun, Moon } from 'lucide-react';
-import AntigravityLogo from './AntigravityLogo';
 
 interface NavbarProps {
   onOpenResume: () => void;
@@ -14,7 +13,7 @@ export default function Navbar({ onOpenResume, isWhiteMode = false, onToggleWhit
   const navLinks = [
     { label: 'About', href: '#hero' },
     { label: 'Experience', href: '#experience' },
-    { label: 'AI Architecture', href: '#ai-architecture', badge: 'Agentic' },
+    { label: 'AI Architecture', href: '#ai-architecture' },
     { label: 'Case Studies', href: '#case-studies' },
     { label: 'Skills', href: '#skills' },
     { label: 'Contact', href: '#contact' },
@@ -23,17 +22,17 @@ export default function Navbar({ onOpenResume, isWhiteMode = false, onToggleWhit
   return (
     <header className="sticky top-0 z-50 w-full border-b border-brand-border/70 bg-brand-dark/90 backdrop-blur-md transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        {/* Zone 1: Brand Wordmark with Google Antigravity Folded Prism */}
-        <a href="#hero" className="flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 rounded-lg p-1">
-          <div className="w-9 h-9 rounded-xl bg-white/10 dark:bg-white/5 border border-slate-700/50 flex items-center justify-center group-hover:scale-105 transition-transform shadow-sm">
-            <AntigravityLogo className="w-5 h-5" />
+        {/* Zone 1: Clean Brand Wordmark */}
+        <a href="#hero" className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 rounded-lg p-1">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-cyan-500 to-cyan-400 flex items-center justify-center font-mono font-bold text-white shadow-sm text-base group-hover:scale-105 transition-transform">
+            SH
           </div>
           <div className="flex flex-col">
             <span className="font-bold text-slate-100 dark:text-white tracking-tight text-base group-hover:text-cyan-400 transition-colors leading-tight">
               Saddam Hussain
             </span>
-            <span className="text-[10px] font-mono text-cyan-400 font-semibold tracking-wider uppercase">
-              Antigravity & Agents
+            <span className="text-[11px] font-mono text-cyan-400 font-medium">
+              Senior Full-Stack Engineer
             </span>
           </div>
         </a>
@@ -47,11 +46,6 @@ export default function Navbar({ onOpenResume, isWhiteMode = false, onToggleWhit
               className="hover:text-cyan-400 transition-colors flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 rounded"
             >
               <span>{link.label}</span>
-              {link.badge && (
-                <span className="px-1.5 py-0.5 text-[10px] rounded bg-cyan-950/90 text-cyan-400 border border-cyan-800/80 font-mono">
-                  {link.badge}
-                </span>
-              )}
             </a>
           ))}
         </nav>
@@ -130,11 +124,6 @@ export default function Navbar({ onOpenResume, isWhiteMode = false, onToggleWhit
                 className="px-3 py-2 rounded-md text-slate-200 hover:bg-brand-surface hover:text-cyan-400 text-sm font-medium flex items-center justify-between"
               >
                 <span>{link.label}</span>
-                {link.badge && (
-                  <span className="px-1.5 py-0.5 text-[10px] rounded bg-cyan-950 text-cyan-400 border border-cyan-800 font-mono">
-                    {link.badge}
-                  </span>
-                )}
               </a>
             ))}
             <div className="pt-2 border-t border-brand-border flex items-center justify-between gap-2">

@@ -4,7 +4,7 @@ export const PROFILE = {
   name: 'Saddam Hussain',
   role: 'Senior Full Stack Engineer & AI Systems Architect',
   shortBio:
-    '8+ years building and shipping high-throughput production web applications, specializing in Python (Django DRF, FastAPI), TypeScript (Next.js, React), and Multi-Agent AI Automations. Proven track record designing OCR document pipelines, WebSocket RPA bridges, and resilient cloud architectures.',
+    '8+ years building and shipping high-throughput production web applications, specializing in Python (Django DRF, FastAPI), TypeScript (Next.js, React), and Production AI Automations. Proven track record designing OCR document pipelines, WebSocket RPA bridges, and resilient cloud architectures.',
   email: 'saddamhussainuos04@gmail.com',
   phone: '+92 317 4016016',
   location: 'Lahore, Pakistan (Open to Global Remote)',
@@ -15,7 +15,7 @@ export const PROFILE = {
   highlights: [
     'Python (Django DRF, FastAPI)',
     'TypeScript (Next.js App Router, React)',
-    'Multi-Agent Workflow Engines & LLM Evals',
+    'Production AI Pipelines & LLM Evals',
     'Docker Containerization & AWS Cloud Infrastructure',
   ],
 };
@@ -23,7 +23,7 @@ export const PROFILE = {
 export const METRICS: MetricItem[] = [
   { value: '8+', label: 'Years Production Exp' },
   { value: '5+', label: 'Companies Scaled' },
-  { value: 'Multi-Agent', label: 'AI Workflow Engines' },
+  { value: 'AI & Cloud', label: 'Production Architectures' },
   { value: 'AWS & Docker', label: 'Production Cloud Deployments' },
   { value: '0 to 1 & Scale', label: 'Architecture to Launch' },
 ];
@@ -31,7 +31,7 @@ export const METRICS: MetricItem[] = [
 export const CASE_STUDIES: CaseStudy[] = [
   {
     id: 'aimyable',
-    title: 'Aimyable — Multi-Agent Accounts Payable Automation SaaS',
+    title: 'Aimyable — Intelligent Accounts Payable Automation SaaS',
     role: 'Core Full-Stack Engineer / AI Architect',
     company: 'Stech Experts LTD',
     period: 'Apr 2025 – Present',
@@ -40,11 +40,11 @@ export const CASE_STUDIES: CaseStudy[] = [
     problem:
       'Corporate accounts-payable workflows require tedious manual invoice data entry, verification against ERP databases, approval routing, and repetitive manual UI execution into legacy Windows accounting applications without open APIs.',
     contributions: [
-      'Multi-Agent Workflow Engine: Designed an intelligent routing engine with specialized agents: a Step Agent for orchestrating multi-step execution graphs, a DB Agent for querying normalized relational schemas, and an RPA Agent for UI execution.',
+      'Workflow Orchestration Engine: Designed an intelligent routing engine with specialized components: an execution orchestrator for multi-step workflows, relational queries for normalized schemas, and an RPA bridge for UI execution.',
       'Automated Invoice Ingestion: Built OCR pipelines utilizing Google Cloud Vision API (Python SDK) to automatically convert raw unstructured PDF/image invoices into validated JSON entities without human entry.',
       'WebSocket RPA Bridge: Developed an orchestration layer linking backend database actions with a Windows RPA desktop client via persistent WebSockets for real-time task dispatch and two-way progress telemetry.',
-      'Robust Auth & Provisioning: Implemented invitation-based tenant registration, RBAC, session-refresh security, and machine-to-machine token auth for automated worker nodes. Integrated Bland AI voice agent for conversational review collection.',
-      'Static Typing & Quality: Enforced rigorous type checking with basedpyright to prevent runtime errors, backed by daily AI coding agents (Claude Code / Codex) with strict diff inspection.',
+      'Robust Auth & Provisioning: Implemented invitation-based tenant registration, RBAC, session-refresh security, and machine-to-machine token auth for automated worker nodes. Integrated Bland AI voice automation for conversational review collection.',
+      'Static Typing & Quality: Enforced rigorous type checking with basedpyright to prevent runtime errors, backed by daily AI coding assistants (Claude Code / Codex) with strict diff inspection.',
     ],
     architectureFlow: [
       {
@@ -53,9 +53,9 @@ export const CASE_STUDIES: CaseStudy[] = [
         subtext: 'Parsed unstructured PDF/image invoices into validated JSON entities.',
       },
       {
-        step: '2. Step Agent Orchestration',
+        step: '2. Workflow Orchestration',
         description: 'Django DRF Service Layer',
-        subtext: 'Evaluates business approval rules and dispatches tasks to DB / RPA agents.',
+        subtext: 'Evaluates business approval rules and dispatches tasks to execution pipelines.',
       },
       {
         step: '3. DB & RPA Execution',
@@ -161,12 +161,12 @@ export const EXPERIENCES: ExperienceItem[] = [
     bulletPoints: [
       'Core full-stack engineer on Aimyable: an AI-powered accounts payable automation SaaS, built using Django DRF, Next.js, TypeScript, and PostgreSQL, containerized with Docker on AWS.',
       'Contributed to system design alongside the CTO, owning implementation across backend services, data modeling, and frontend workflows.',
-      'Built a multi-agent workflow engine that routes tasks across specialized agents (Step Agent for orchestration, DB Agent for data queries, and an RPA agent for UI actions) to run multi-step invoice automation.',
-      'Leveraged daily AI coding agents (Claude Code, Codex) for scaffolding, refactoring, and debugging across multi-repo codebases, rigorously reviewing every diff and backing changes with type checks.',
+      'Built an orchestration workflow engine that routes tasks across specialized components (state machine for orchestration, relational queries for data, and an RPA bridge for UI actions) to run multi-step invoice automation.',
+      'Leveraged daily AI coding assistants (Claude Code, Codex) for scaffolding, refactoring, and debugging across multi-repo codebases, rigorously reviewing every diff and backing changes with type checks.',
       'Engineered automated invoice ingestion with Google Cloud Vision API (Python SDK) for zero manual entry.',
       'Constructed an orchestration layer connecting DB operations with a Windows RPA client over persistent WebSockets for real-time task execution.',
       'Designed normalized PostgreSQL schemas and core REST APIs with service-layer separation, serializer validation, and static type checking via basedpyright.',
-      'Integrated Bland AI voice agent into backend to automate customer review collection.',
+      'Integrated Bland AI voice automation into backend to streamline customer review collection.',
     ],
   },
   {
@@ -221,9 +221,9 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     skills: ['Next.js (App Router)', 'React', 'Redux / Zustand', 'Tailwind CSS', 'Material UI', 'React Hook Form', 'Server Actions'],
   },
   {
-    name: 'AI & Agentic Workflows',
+    name: 'AI & Automation Systems',
     icon: 'sparkles',
-    skills: ['Multi-Agent Systems', 'LLM Evals', 'OpenAI API', 'Claude Code / Codex', 'Google Cloud Vision OCR', 'Bland AI Voice Agent', 'Agentic State Graphs'],
+    skills: ['Production AI Pipelines', 'LLM Evals', 'OpenAI API', 'Claude Code / Codex', 'Google Cloud Vision OCR', 'Bland AI Voice Automation', 'State Graph Workflows'],
   },
   {
     name: 'Databases & Caching',

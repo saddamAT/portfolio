@@ -14,7 +14,7 @@ export default function AISystemsArchitecture() {
     setSimResult(null);
     setSimStepIndex(0);
 
-    // Call Server Action
+    // Call Action
     const result = await runAgentPipelineAction({
       invoiceNumber: 'INV-2026-7821',
       vendor: 'Nexus Logistics Global',
@@ -33,93 +33,92 @@ export default function AISystemsArchitecture() {
   };
 
   return (
-    <section className="py-20 bg-brand-surface relative border-t border-brand-border" id="ai-architecture">
+    <section className="py-20 bg-brand-surface/75 backdrop-blur-sm relative border-t border-brand-border" id="ai-architecture">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-700 text-cyan-300 text-xs font-mono mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-800 text-cyan-300 text-xs font-mono mb-3">
             <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
             <span>Production AI Blueprint</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold text-white tracking-tight leading-tight">
-            Agentic AI & Evaluation Pipeline Architecture
+            Production AI & Evaluation Pipeline Architecture
           </h2>
           <p className="mt-4 text-slate-300 text-base">
-            How I architect and govern autonomous systems in production: combining multi-agent graphs with strict
-            deterministic validation, type assertions, and continuous LLM evaluation.
+            How I architect and govern autonomous systems in production: combining structured state graphs with strict
+            deterministic validation, type assertions, and continuous model evaluation.
           </p>
         </div>
 
         {/* 4-Step Architecture Grid */}
-        <div className="glass-card rounded-2xl p-6 sm:p-10 border border-cyan-500/30 shadow-glow-cyan/20">
+        <div className="glass-card rounded-2xl p-6 sm:p-10 border border-brand-border shadow-2xl">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
             {/* Step 1 */}
-            <div className="p-5 rounded-xl bg-brand-elevated border border-brand-border relative group hover:border-cyan-400 transition-colors">
+            <div className="p-5 rounded-xl bg-brand-elevated border border-brand-border relative group hover:border-cyan-500 transition-colors">
               <div className="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-mono font-bold text-xs mb-3">
                 01
               </div>
               <h3 className="text-base font-bold text-white">Ingestion & OCR</h3>
-              <p className="text-xs text-slate-300 mt-2">
+              <p className="text-xs text-slate-300 mt-2 leading-relaxed">
                 Google Cloud Vision API (Python SDK) extracts unstructured documents into typed entity schemas.
               </p>
-              <div className="mt-4 pt-3 border-t border-brand-border/60 text-[11px] font-mono text-cyan-400">
+              <div className="mt-4 pt-3 border-t border-brand-border text-[11px] font-mono text-cyan-400">
                 • Zero Manual Entry
                 <br />• Pre-validated payloads
               </div>
             </div>
 
             {/* Step 2 */}
-            <div className="p-5 rounded-xl bg-brand-elevated border border-cyan-500/50 relative group shadow-glow-cyan/10">
+            <div className="p-5 rounded-xl bg-brand-elevated border border-brand-border relative group hover:border-blue-500 transition-colors">
               <div className="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-mono font-bold text-xs mb-3">
                 02
               </div>
-              <h3 className="text-base font-bold text-white">Multi-Agent Router</h3>
-              <p className="text-xs text-slate-300 mt-2">
-                Step Agent evaluates state graph and dispatches deterministic tasks to DB or UI execution agents.
+              <h3 className="text-base font-bold text-white">Workflow Orchestrator</h3>
+              <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+                Orchestration router evaluates state graphs and dispatches deterministic tasks to DB or execution pipelines.
               </p>
-              <div className="mt-4 pt-3 border-t border-brand-border/60 text-[11px] font-mono text-blue-400">
-                • Step Agent (State graph)
-                <br />• DB Agent (ORM queries)
+              <div className="mt-4 pt-3 border-t border-brand-border text-[11px] font-mono text-blue-400">
+                • State Graph Engine
+                <br />• Relational Verification
               </div>
             </div>
 
             {/* Step 3 */}
-            <div className="p-5 rounded-xl bg-brand-elevated border border-brand-border relative group hover:border-cyan-400 transition-colors">
+            <div className="p-5 rounded-xl bg-brand-elevated border border-brand-border relative group hover:border-purple-500 transition-colors">
               <div className="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-mono font-bold text-xs mb-3">
                 03
               </div>
               <h3 className="text-base font-bold text-white">WebSocket RPA</h3>
-              <p className="text-xs text-slate-300 mt-2">
-                Real-time bidirectional bridge dispatching automation commands to Windows desktop clients.
+              <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+                Real-time bidirectional bridge dispatching automation commands to desktop clients.
               </p>
-              <div className="mt-4 pt-3 border-t border-brand-border/60 text-[11px] font-mono text-purple-400">
+              <div className="mt-4 pt-3 border-t border-brand-border text-[11px] font-mono text-purple-400">
                 • Zero human handoff
                 <br />• Machine token auth
               </div>
             </div>
 
             {/* Step 4 */}
-            <div className="p-5 rounded-xl bg-brand-elevated border border-brand-border relative group hover:border-cyan-400 transition-colors">
+            <div className="p-5 rounded-xl bg-brand-elevated border border-brand-border relative group hover:border-emerald-500 transition-colors">
               <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono font-bold text-xs mb-3">
                 04
               </div>
-              <h3 className="text-base font-bold text-white">LLM Evals & Guardrails</h3>
-              <p className="text-xs text-slate-300 mt-2">
-                Automated regression eval test suites verifying agent outputs against precision thresholds before write
-                operations.
+              <h3 className="text-base font-bold text-white">Model Evals & Guardrails</h3>
+              <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+                Automated regression eval test suites verifying model outputs against precision thresholds before write operations.
               </p>
-              <div className="mt-4 pt-3 border-t border-brand-border/60 text-[11px] font-mono text-emerald-400">
-                • Claude Code / Codex
-                <br />• basedpyright checking
+              <div className="mt-4 pt-3 border-t border-brand-border text-[11px] font-mono text-emerald-400">
+                • basedpyright checked
+                <br />• Strict JSON schemas
               </div>
             </div>
           </div>
 
-          {/* Interactive Live Simulation Trigger & Terminal View */}
-          <div className="mt-8 pt-6 border-t border-brand-border flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          {/* Interactive Simulation Controls */}
+          <div className="mt-10 pt-8 border-t border-brand-border flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">
-                Live Interactive Simulation:
+              <span className="text-xs font-mono text-slate-400 uppercase tracking-wider font-semibold">
+                Interactive Simulation:
               </span>
               <button
                 type="button"
@@ -135,7 +134,7 @@ export default function AISystemsArchitecture() {
                 ) : (
                   <>
                     <Play className="w-3.5 h-3.5 fill-current" />
-                    <span>Run Test Pipeline (Server Action)</span>
+                    <span>Run Test Pipeline</span>
                   </>
                 )}
               </button>
@@ -146,7 +145,7 @@ export default function AISystemsArchitecture() {
               <button
                 type="button"
                 onClick={() => setActiveTab('python')}
-                className={`px-3 py-1 rounded transition-colors ${
+                className={`px-3 py-1 rounded transition-colors cursor-pointer ${
                   activeTab === 'python'
                     ? 'bg-brand-elevated text-cyan-300 border border-cyan-700/60 font-semibold'
                     : 'text-slate-400 hover:text-white'
@@ -157,7 +156,7 @@ export default function AISystemsArchitecture() {
               <button
                 type="button"
                 onClick={() => setActiveTab('typescript')}
-                className={`px-3 py-1 rounded transition-colors ${
+                className={`px-3 py-1 rounded transition-colors cursor-pointer ${
                   activeTab === 'typescript'
                     ? 'bg-brand-elevated text-cyan-300 border border-cyan-700/60 font-semibold'
                     : 'text-slate-400 hover:text-white'
@@ -168,7 +167,7 @@ export default function AISystemsArchitecture() {
             </div>
           </div>
 
-          {/* Live Simulation Execution Trace (Appears when user triggers simulation) */}
+          {/* Live Simulation Execution Trace */}
           {(isSimulating || simResult) && (
             <div className="mt-6 rounded-xl bg-slate-950 p-4 border border-cyan-500/40 font-mono text-xs text-slate-300">
               <div className="flex items-center justify-between pb-3 border-b border-slate-800 text-slate-400">
@@ -189,13 +188,14 @@ export default function AISystemsArchitecture() {
                 <span className="text-[11px] text-slate-500">Target: Windows RPA Bridge</span>
               </div>
 
+              {/* Steps trace */}
               <div className="mt-3 space-y-2">
                 {(simResult?.steps || [
-                  { step: 1, name: 'GCV OCR Ingestion', latencyMs: 135, details: 'Extracting fields...' },
-                  { step: 2, name: 'Step Agent Routing', latencyMs: 88, details: 'Evaluating state graph...' },
-                  { step: 3, name: 'DB Agent Verification', latencyMs: 65, details: 'Running SQL queries...' },
-                  { step: 4, name: 'WebSocket RPA Dispatch', latencyMs: 104, details: 'Connecting to Windows client...' },
-                  { step: 5, name: 'Guardrail Evals', latencyMs: 43, details: 'Running regression assertions...' },
+                  { step: 1, name: 'GCV OCR Ingestion', latencyMs: 135, details: 'Extracting structured fields...' },
+                  { step: 2, name: 'Orchestration State Graph Routing', latencyMs: 92, details: 'Evaluating rule tree...' },
+                  { step: 3, name: 'Relational Database Verification', latencyMs: 68, details: 'Checking PO hash in PostgreSQL...' },
+                  { step: 4, name: 'WebSocket RPA Desktop Bridge', latencyMs: 104, details: 'Dispatching payload to client...' },
+                  { step: 5, name: 'Model Evals Guardrails & Precision Check', latencyMs: 43, details: 'Evaluating assertions...' },
                 ]).map((step, idx) => {
                   const isDone = simResult || idx <= simStepIndex;
                   const isCurrent = isSimulating && idx === simStepIndex;
@@ -236,31 +236,31 @@ export default function AISystemsArchitecture() {
             </div>
           )}
 
-          {/* Interactive Agent Demo Code View */}
-          <div className="mt-6 rounded-xl bg-brand-dark p-4 border border-brand-border font-mono text-xs overflow-x-auto text-slate-300">
-            <div className="flex items-center justify-between pb-3 border-b border-brand-border/60 text-slate-400">
+          {/* Interactive Code View */}
+          <div className="mt-6 rounded-xl bg-slate-900 p-4 border border-brand-border font-mono text-xs overflow-x-auto text-slate-300">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-800 text-slate-400">
               <span className="text-cyan-400 font-semibold flex items-center gap-1.5">
                 <Code2 className="w-4 h-4" />
                 {activeTab === 'python'
-                  ? '// Live Production Pattern: Multi-Agent Dispatch with Type Verification'
-                  : '// Next.js Server Action: Deterministic Workflow Execution'}
+                  ? '// Production Pattern: Structured Pipeline with Type Verification'
+                  : '// TypeScript Server Action: Deterministic Workflow Execution'}
               </span>
               <span>{activeTab === 'python' ? 'python (basedpyright)' : 'typescript (next.js)'}</span>
             </div>
 
             {activeTab === 'python' ? (
               <pre className="mt-3 leading-relaxed">
-                <span className="text-purple-400">class</span> <span className="text-yellow-300">AgentOrchestrator</span>:
-                {'\n'}    <span className="text-slate-500">"""Coordinates Step Agent, DB queries, and WebSocket RPA task dispatches."""</span>
+                <span className="text-purple-400">class</span> <span className="text-yellow-300">WorkflowOrchestrator</span>:
+                {'\n'}    <span className="text-slate-500">"""Coordinates document parsing, database queries, and WebSocket RPA task dispatches."""</span>
                 {'\n'}    <span className="text-purple-400">async def</span> <span className="text-blue-400">process_invoice_pipeline</span>(
                 <span className="text-cyan-300">self</span>, invoice_payload: InvoiceSchema
                 ) -&gt; ExecutionResult:
                 {'\n'}        <span className="text-slate-500"># 1. OCR Extraction & Schema parsing via GCV Python SDK</span>
                 {'\n'}        structured_data = <span className="text-purple-400">await</span> <span className="text-cyan-300">self</span>.vision_client.extract_fields(invoice_payload)
                 {'\n'}
-                {'\n'}        <span className="text-slate-500"># 2. Step Agent evaluation of validation rules</span>
-                {'\n'}        agent_decision = <span className="text-purple-400">await</span> <span className="text-cyan-300">self</span>.step_agent.evaluate_rules(structured_data)
-                {'\n'}        <span className="text-purple-400">if not</span> agent_decision.passed_evals:
+                {'\n'}        <span className="text-slate-500"># 2. State graph evaluation of validation rules</span>
+                {'\n'}        eval_decision = <span className="text-purple-400">await</span> <span className="text-cyan-300">self</span>.router.evaluate_rules(structured_data)
+                {'\n'}        <span className="text-purple-400">if not</span> eval_decision.passed_evals:
                 {'\n'}            <span className="text-purple-400">return</span> ExecutionResult(status=<span className="text-emerald-300">"FLAGGED_FOR_HUMAN_REVIEW"</span>)
                 {'\n'}
                 {'\n'}        <span className="text-slate-500"># 3. Realtime dispatch via WebSockets to RPA Client</span>
@@ -274,7 +274,7 @@ export default function AISystemsArchitecture() {
             ) : (
               <pre className="mt-3 leading-relaxed">
                 <span className="text-purple-400">'use server'</span>;{'\n'}
-                {'\n'}<span className="text-purple-400">export async function</span> <span className="text-blue-400">runAgentPipelineAction</span>(
+                {'\n'}<span className="text-purple-400">export async function</span> <span className="text-blue-400">runPipelineAction</span>(
                 {'\n'}  params: InvoicePayload
                 {'\n'}): Promise&lt;ActionResponse&lt;PipelineResult&gt;&gt; {'{'}
                 {'\n'}  <span className="text-slate-500">// Static TypeScript verification & server-side validation</span>

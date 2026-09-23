@@ -14,7 +14,7 @@ export default function ContactSection() {
     name: '',
     email: '',
     company: '',
-    projectType: 'Multi-Agent AI SaaS Architecture',
+    projectType: 'Production AI SaaS Architecture',
     budget: '$25,000 – $50,000',
     message: '',
   });
@@ -44,7 +44,7 @@ export default function ContactSection() {
         name: '',
         email: '',
         company: '',
-        projectType: 'Multi-Agent AI SaaS Architecture',
+        projectType: 'Production AI SaaS Architecture',
         budget: '$25,000 – $50,000',
         message: '',
       });
@@ -55,12 +55,12 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="py-20 bg-brand-surface relative border-t border-brand-border" id="contact">
+    <section className="py-20 bg-brand-surface/75 backdrop-blur-sm relative border-t border-brand-border" id="contact">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="glass-card rounded-3xl p-8 sm:p-12 border border-cyan-500/40 shadow-glow-cyan/20">
+        <div className="glass-card rounded-3xl p-8 sm:p-12 border border-brand-border shadow-2xl">
           {/* Header Banner */}
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950 border border-emerald-800 text-emerald-300 text-xs font-mono mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-800 text-emerald-400 text-xs font-mono mb-3">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               Available for Full-time Roles & High-Impact Consulting
             </div>
@@ -90,16 +90,16 @@ export default function ContactSection() {
               <button
                 type="button"
                 onClick={handleCopyEmail}
-                className="mt-4 px-3 py-1.5 rounded-lg bg-brand-surface hover:bg-brand-border text-slate-300 text-xs font-mono flex items-center gap-1.5 border border-brand-border transition-colors cursor-pointer"
+                className="mt-4 px-3 py-1.5 rounded-lg bg-brand-surface hover:bg-brand-elevated text-slate-300 text-xs font-mono flex items-center gap-1.5 border border-brand-border transition-colors cursor-pointer"
               >
                 {copiedEmail ? (
                   <>
                     <Check className="w-3.5 h-3.5 text-emerald-400" />
-                    <span className="text-emerald-400 font-sans">Copied! ✓</span>
+                    <span className="text-emerald-400 font-sans font-medium">Copied! ✓</span>
                   </>
                 ) : (
                   <>
-                    <Copy className="w-3.5 h-3.5" />
+                    <Copy className="w-3.5 h-3.5 text-slate-400" />
                     <span>Copy Email</span>
                   </>
                 )}
@@ -124,7 +124,7 @@ export default function ContactSection() {
             {/* LinkedIn Card */}
             <div className="p-5 rounded-2xl bg-brand-elevated border border-brand-border flex flex-col items-center justify-between">
               <div className="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 mb-3">
-                <Linkedin className="w-6 h-6 text-indigo-400" />
+                <Linkedin className="w-6 h-6" />
               </div>
               <div className="text-xs font-mono text-slate-400 mb-1">Professional Network</div>
               <span className="text-white font-semibold text-sm">{PROFILE.name}</span>
@@ -139,8 +139,8 @@ export default function ContactSection() {
             </div>
           </div>
 
-          {/* Direct Project Inquiry Form backed by Server Action */}
-          <div className="border-t border-brand-border/80 pt-10">
+          {/* Direct Project Inquiry Form backed by Action */}
+          <div className="border-t border-brand-border pt-10">
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h3 className="text-xl font-bold text-white flex items-center gap-2">
@@ -148,7 +148,7 @@ export default function ContactSection() {
                   <span>Send a Project Inquiry</span>
                 </h3>
                 <p className="text-xs text-slate-400 mt-1 font-mono">
-                  Direct submission via Next.js Server Action with instant validation
+                  Direct submission with instant schema validation
                 </p>
               </div>
               <span className="hidden sm:inline-block text-[11px] font-mono text-emerald-400 bg-emerald-950/80 px-2.5 py-1 rounded border border-emerald-800">
@@ -164,7 +164,7 @@ export default function ContactSection() {
                 <button
                   type="button"
                   onClick={() => setFormSuccess(null)}
-                  className="mt-4 px-4 py-2 rounded-lg bg-brand-surface hover:bg-brand-elevated border border-brand-border text-xs font-mono text-slate-300"
+                  className="mt-4 px-4 py-2 rounded-lg bg-brand-surface hover:bg-brand-elevated border border-brand-border text-xs font-mono text-slate-300 cursor-pointer"
                 >
                   Send Another Message
                 </button>
@@ -190,7 +190,7 @@ export default function ContactSection() {
                       placeholder="Sarah Jenkins"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-dark border border-brand-border text-white text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-dark border border-brand-border text-white text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
                     />
                   </div>
 
@@ -205,7 +205,7 @@ export default function ContactSection() {
                       placeholder="sarah@company.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-dark border border-brand-border text-white text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-dark border border-brand-border text-white text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
                     />
                   </div>
                 </div>
@@ -221,7 +221,7 @@ export default function ContactSection() {
                       placeholder="Acme Corp"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-dark border border-brand-border text-white text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-dark border border-brand-border text-white text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
                     />
                   </div>
 
@@ -233,9 +233,9 @@ export default function ContactSection() {
                       id="contact-type"
                       value={formData.projectType}
                       onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-dark border border-brand-border text-white text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-dark border border-brand-border text-white text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
                     >
-                      <option value="Multi-Agent AI SaaS Architecture">Multi-Agent AI SaaS Architecture</option>
+                      <option value="Production AI SaaS Architecture">Production AI SaaS Architecture</option>
                       <option value="Full-Stack Web Application (Next.js/Python)">Full-Stack Web App (Next.js/Python)</option>
                       <option value="Performance & Realtime Optimization">Performance & Realtime Optimization</option>
                       <option value="Senior Staff / Team Lead Role">Senior Staff / Team Lead Role</option>
@@ -251,7 +251,7 @@ export default function ContactSection() {
                       id="contact-budget"
                       value={formData.budget}
                       onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-dark border border-brand-border text-white text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-dark border border-brand-border text-white text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
                     >
                       <option value="Full-Time Employment (Permanent)">Full-Time Employment (Permanent)</option>
                       <option value="$10,000 – $25,000 Project">$10,000 – $25,000 Project</option>
@@ -273,27 +273,28 @@ export default function ContactSection() {
                     placeholder="Describe your project, architecture requirements, or role details..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-brand-dark border border-brand-border text-white text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-brand-dark border border-brand-border text-white text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
                   />
                 </div>
 
                 <div className="flex items-center justify-between pt-2">
-                  <span className="text-[11px] font-mono text-slate-500">
-                    End-to-end encrypted · Direct to Saddam's inbox
-                  </span>
+                  <div className="text-[11px] font-mono text-slate-400">
+                    🔒 Direct transmission · Zero spam policy
+                  </div>
+
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-semibold text-sm shadow-glow-cyan transition-all disabled:opacity-50 cursor-pointer"
+                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-semibold text-sm shadow-glow-cyan transition-all disabled:opacity-50 flex items-center gap-2 cursor-pointer"
                   >
                     {isSubmitting ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        <span>Transmitting Server Action...</span>
+                        <span>Transmitting...</span>
                       </>
                     ) : (
                       <>
-                        <span>Submit Inquiry</span>
+                        <span>Submit Project Inquiry</span>
                         <Send className="w-4 h-4" />
                       </>
                     )}

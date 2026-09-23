@@ -57,7 +57,7 @@ export default function Footer({ onOpenResume }: FooterProps) {
 
         {/* Built With Credit */}
         <div className="text-slate-500">
-          <span>TypeScript · Next.js Server Actions · Tailwind CSS</span>
+          <span>TypeScript · Python · Next.js · Tailwind CSS</span>
         </div>
       </div>
     </footer>

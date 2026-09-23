@@ -28,7 +28,7 @@ export default function ExperienceTimeline() {
                 {/* Bullet indicator */}
                 <span
                   className={`absolute -left-[9px] top-1.5 w-4 h-4 rounded-full ring-4 ring-brand-dark ${
-                    isFirst ? 'bg-cyan-400' : isSecond ? 'bg-blue-500' : 'bg-slate-400'
+                    isFirst ? 'bg-cyan-500' : isSecond ? 'bg-blue-500' : 'bg-slate-500'
                   }`}
                 />
 
@@ -42,7 +42,7 @@ export default function ExperienceTimeline() {
                     <span
                       className={`px-3 py-1 rounded-full text-xs font-mono border ${
                         isFirst
-                          ? 'bg-cyan-950 text-cyan-300 border-cyan-800'
+                          ? 'bg-cyan-950/80 text-cyan-300 border-cyan-800'
                           : 'bg-brand-surface text-slate-300 border-brand-border'
                       }`}
                     >
@@ -52,7 +52,11 @@ export default function ExperienceTimeline() {
 
                   <div
                     className={`text-sm font-semibold font-mono mb-4 ${
-                      isFirst ? 'text-cyan-400' : isSecond ? 'text-blue-400' : 'text-slate-300'
+                      isFirst
+                        ? 'text-cyan-400'
+                        : isSecond
+                        ? 'text-blue-400'
+                        : 'text-slate-300'
                     }`}
                   >
                     {exp.company} · {exp.location}

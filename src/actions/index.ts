@@ -60,8 +60,8 @@ export async function submitContactAction(
 }
 
 /**
- * Server Action: Run Interactive Agent Pipeline Simulation
- * Executes multi-agent state evaluation with real latency and token trace
+ * Server Action: Run Interactive AI Pipeline Simulation
+ * Executes workflow state evaluation with real latency and token trace
  */
 export async function runAgentPipelineAction(params: {
   invoiceNumber: string;
@@ -69,7 +69,7 @@ export async function runAgentPipelineAction(params: {
   amount: number;
 }): Promise<ActionResponse<PipelineExecutionResult>> {
   try {
-    const res = await fetch('/api/agent-pipeline/run', {
+    const res = await fetch('/api/pipeline/run', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -105,14 +105,14 @@ export async function runAgentPipelineAction(params: {
           },
           {
             step: 2,
-            name: 'Step Agent State Graph Routing',
+            name: 'Orchestration State Graph Routing',
             status: 'COMPLETED',
             latencyMs: 92,
             details: 'Evaluated deterministic business rules against approval thresholds. Verified PO alignment.',
           },
           {
             step: 3,
-            name: 'DB Agent Relational Verification',
+            name: 'Relational Database Verification',
             status: 'COMPLETED',
             latencyMs: 68,
             details: 'Executed parameterized PostgreSQL query to check vendor tax ID & anti-duplicate invoice hash.',
