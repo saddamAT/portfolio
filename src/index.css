@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+:root {
+  --font-sans: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
 @theme {
   --color-brand-dark: #080a0f;
   --color-brand-surface: #0f141c;
@@ -10,8 +15,8 @@
   --color-brand-emerald: #10b981;
   --color-brand-accent: #6366f1;
 
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
 
   --shadow-glow-cyan: 0 0 25px -5px rgba(6, 182, 212, 0.35);
   --shadow-glow-blue: 0 0 30px -5px rgba(59, 130, 246, 0.35);
@@ -20,8 +25,39 @@
 body {
   background-color: #080a0f;
   color: #e2e8f0;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-sans);
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.65;
   overflow-x: hidden;
+}
+
+/* Headings default to primary font Manrope */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+}
+
+/* Monospace defaults */
+code, kbd, samp, pre {
+  font-family: var(--font-mono);
+}
+
+/* Typography Scale Helpers */
+.hero-heading {
+  font-family: var(--font-sans);
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+
+.section-heading {
+  font-family: var(--font-sans);
+  font-size: clamp(1.75rem, 3.5vw, 2.65rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
 .grid-bg-pattern {

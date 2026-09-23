@@ -15,7 +15,7 @@ export default function CaseStudies() {
             <div className="text-cyan-400 text-xs font-mono font-semibold tracking-wider uppercase mb-2">
               Flagship Implementations
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold text-white tracking-tight leading-tight">
               Featured Engineering Case Studies
             </h2>
           </div>

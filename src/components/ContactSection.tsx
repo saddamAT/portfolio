@@ -64,7 +64,7 @@ export default function ContactSection() {
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               Available for Full-time Roles & High-Impact Consulting
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold text-white tracking-tight leading-tight">
               Let's Build Something Exceptional
             </h2>
             <p className="mt-3 text-slate-300 text-sm">

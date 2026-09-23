@@ -49,11 +49,11 @@ export default function SkillsGrid() {
           <div className="text-cyan-400 text-xs font-mono font-semibold tracking-wider uppercase mb-2">
             Technical Proficiency
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold text-white tracking-tight leading-tight">
             Verified Engineering Stack
           </h2>
           <p className="mt-3 text-slate-300 text-sm">
-            Categorized capabilities built over years of production delivery without arbitrary percentage meters.
+            Categorized capabilities built over 8+ years of production delivery without arbitrary percentage meters.
           </p>
 
           {/* Interactive Filter Controls (Functional button tabs) */}

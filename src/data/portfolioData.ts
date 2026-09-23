@@ -4,7 +4,7 @@ export const PROFILE = {
   name: 'Saddam Hussain',
   role: 'Senior Full Stack Engineer & AI Systems Architect',
   shortBio:
-    'Senior engineer specializing in building and shipping high-throughput production web applications, Python (Django DRF, FastAPI), TypeScript (Next.js, React), and Multi-Agent AI Automations. Proven track record designing OCR document pipelines, WebSocket RPA bridges, and resilient cloud architectures.',
+    '8+ years building and shipping high-throughput production web applications, specializing in Python (Django DRF, FastAPI), TypeScript (Next.js, React), and Multi-Agent AI Automations. Proven track record designing OCR document pipelines, WebSocket RPA bridges, and resilient cloud architectures.',
   email: 'saddamhussainuos04@gmail.com',
   phone: '+92 317 4016016',
   location: 'Lahore, Pakistan (Open to Global Remote)',
@@ -21,7 +21,7 @@ export const PROFILE = {
 };
 
 export const METRICS: MetricItem[] = [
-  { value: 'Full-Cycle', label: 'Production Engineering' },
+  { value: '8+', label: 'Years Production Exp' },
   { value: '5+', label: 'Companies Scaled' },
   { value: 'Multi-Agent', label: 'AI Workflow Engines' },
   { value: 'AWS & Docker', label: 'Production Cloud Deployments' },

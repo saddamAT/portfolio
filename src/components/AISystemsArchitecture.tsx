@@ -41,7 +41,7 @@ export default function AISystemsArchitecture() {
             <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
             <span>Production AI Blueprint</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold text-white tracking-tight leading-tight">
             Agentic AI & Evaluation Pipeline Architecture
           </h2>
           <p className="mt-4 text-slate-300 text-base">
